@@ -1,0 +1,174 @@
+.weekly-view {
+  max-width: 1200px;
+}
+
+.week-range {
+  font-size: 14px;
+  color: #6c7086;
+  font-weight: 400;
+}
+
+.weekly-top-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.ref-panel {
+  background: #181825;
+  border: 1px solid #313244;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.ref-task-list {
+  margin-top: 8px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.weekly-main-section {
+  margin-bottom: 16px;
+}
+
+.weekly-main-section h3 {
+  margin: 0 0 12px;
+  font-size: 16px;
+  color: #cba6f7;
+}
+
+/* Day columns grid */
+.week-days-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.day-column {
+  background: #181825;
+  border: 1px solid #313244;
+  border-radius: 8px;
+  padding: 8px;
+  min-height: 120px;
+}
+
+.day-column.unassigned-column {
+  margin-bottom: 16px;
+  background: #1e1e2e;
+  border-color: #45475a;
+}
+
+.day-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #313244;
+  margin-bottom: 8px;
+}
+
+.day-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: #cba6f7;
+}
+
+.day-date {
+  font-size: 11px;
+  color: #6c7086;
+}
+
+.day-count {
+  margin-right: auto;
+  margin-left: 0;
+  font-size: 11px;
+  background: #313244;
+  color: #a6adc8;
+  padding: 1px 6px;
+  border-radius: 10px;
+}
+
+.day-tasks {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.day-task-wrapper {
+  position: relative;
+}
+
+.assign-day-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: center;
+  margin-top: 4px;
+  padding: 4px 0;
+}
+
+.assign-label {
+  font-size: 11px;
+  color: #6c7086;
+}
+
+.assign-day-btn {
+  font-size: 10px;
+  padding: 2px 6px;
+  background: #313244;
+  border: 1px solid #45475a;
+  border-radius: 4px;
+  color: #89b4fa;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.assign-day-btn:hover {
+  background: #89b4fa22;
+  border-color: #89b4fa;
+}
+
+.unassign-btn {
+  font-size: 10px;
+  color: #f38ba8;
+  padding: 2px 0;
+}
+
+.add-to-day-btn {
+  font-size: 11px;
+  color: #6c7086;
+  padding: 6px 0;
+  text-align: center;
+}
+
+.add-to-day-btn:hover {
+  color: #89b4fa;
+}
+
+.weekly-general-add {
+  margin-top: 12px;
+}
+
+/* Make task items smaller in day columns */
+.week-days-grid .task-item {
+  padding: 6px 8px;
+}
+
+.week-days-grid .task-item-row {
+  gap: 6px;
+}
+
+.week-days-grid .task-title {
+  font-size: 12px;
+}
+
+.week-days-grid .task-actions .btn-icon span {
+  display: none;
+}
+
+.week-days-grid .category-badge {
+  font-size: 9px;
+  padding: 1px 5px;
+}

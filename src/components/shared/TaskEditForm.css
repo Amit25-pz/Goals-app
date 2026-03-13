@@ -1,0 +1,81 @@
+.task-edit-form {
+  background: #1e1e2e;
+  border: 1px solid #45475a;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 6px;
+}
+
+.edit-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+.edit-row label {
+  font-size: 12px;
+  color: #6c7086;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.edit-row input,
+.edit-row select,
+.edit-row textarea {
+  padding: 8px 10px;
+  background: #181825;
+  border: 1px solid #313244;
+  border-radius: 6px;
+  color: #cdd6f4;
+  font-size: 13px;
+  font-family: inherit;
+}
+
+.edit-row textarea {
+  resize: vertical;
+}
+
+.edit-row input:focus,
+.edit-row select:focus,
+.edit-row textarea:focus {
+  outline: none;
+  border-color: #89b4fa;
+}
+
+.edit-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.btn-primary {
+  background: #89b4fa;
+  color: #1e1e2e;
+}
+
+.btn-primary:hover {
+  background: #74c7ec;
+}
+
+.btn-secondary {
+  background: #313244;
+  color: #cdd6f4;
+}
+
+.btn-secondary:hover {
+  background: #45475a;
+}

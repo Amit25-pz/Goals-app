@@ -1,0 +1,84 @@
+.settings-view {
+  max-width: 700px;
+}
+
+.settings-view h2 {
+  margin: 0 0 20px;
+  font-size: 20px;
+}
+
+.settings-section {
+  background: #1e1e2e;
+  border: 1px solid #313244;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.settings-section h3 {
+  margin: 0 0 14px;
+  font-size: 15px;
+  color: #cba6f7;
+}
+
+.category-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.category-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  background: #181825;
+  border-radius: 6px;
+}
+
+.cat-color {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.cat-name {
+  flex: 1;
+  font-size: 14px;
+}
+
+.cat-badge {
+  font-size: 11px;
+  color: #6c7086;
+  background: #313244;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.add-category-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.color-picker {
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: none;
+}
+
+.data-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.import-msg {
+  font-size: 13px;
+  color: #a6e3a1;
+  margin-top: 8px;
+}

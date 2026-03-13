@@ -1,0 +1,142 @@
+.task-item {
+  background: #1e1e2e;
+  border: 1px solid #313244;
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-bottom: 6px;
+}
+
+.task-item.completed {
+  opacity: 0.6;
+}
+
+.task-item.completed .task-title {
+  text-decoration: line-through;
+}
+
+.task-item-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.task-checkbox {
+  width: 18px;
+  height: 18px;
+  accent-color: #a6e3a1;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.task-title {
+  flex: 1;
+  font-size: 14px;
+  color: #cdd6f4;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.category-badge {
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  border: 1px solid;
+  white-space: nowrap;
+}
+
+.task-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.btn-icon {
+  background: none;
+  border: none;
+  color: #6c7086;
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  transition: all 0.15s;
+}
+
+.btn-icon:hover {
+  background: #313244;
+  color: #cdd6f4;
+}
+
+.btn-icon.btn-danger:hover {
+  color: #f38ba8;
+}
+
+.btn-pull, .btn-promote {
+  color: #89b4fa;
+  font-size: 11px;
+}
+
+.btn-pull:hover, .btn-promote:hover {
+  background: #89b4fa22;
+  color: #89b4fa;
+}
+
+.task-details {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #313244;
+}
+
+.task-description {
+  font-size: 13px;
+  color: #a6adc8;
+  margin: 0 0 6px;
+  white-space: pre-wrap;
+}
+
+.task-meta {
+  font-size: 12px;
+  color: #6c7086;
+  margin: 2px 0;
+}
+
+.btn-text {
+  background: none;
+  border: none;
+  color: #89b4fa;
+  cursor: pointer;
+  font-size: 12px;
+  padding: 4px 0;
+  text-decoration: underline;
+}
+
+.task-status-input {
+  width: 100%;
+  margin-top: 6px;
+  padding: 8px;
+  background: #181825;
+  border: 1px solid #313244;
+  border-radius: 6px;
+  color: #cdd6f4;
+  font-size: 13px;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.subtask-list {
+  margin-top: 10px;
+  padding-left: 20px;
+}
+
+.subtask-label {
+  font-size: 12px;
+  color: #6c7086;
+  margin: 0 0 6px;
+  font-weight: 600;
+}

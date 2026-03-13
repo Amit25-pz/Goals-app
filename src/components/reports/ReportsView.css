@@ -1,0 +1,179 @@
+.reports-view {
+  max-width: 900px;
+}
+
+.reports-view h2 {
+  margin: 0 0 16px;
+  font-size: 20px;
+}
+
+.report-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 16px;
+}
+
+.tab {
+  padding: 8px 20px;
+  background: #1e1e2e;
+  border: 1px solid #313244;
+  border-radius: 6px;
+  color: #a6adc8;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.15s;
+}
+
+.tab.active {
+  background: #45475a;
+  color: #cba6f7;
+  border-color: #cba6f7;
+}
+
+.report-editor {
+  background: #1e1e2e;
+  border: 1px solid #313244;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 16px 0;
+}
+
+.report-editor h3 {
+  margin: 0 0 8px;
+  color: #cdd6f4;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.report-editor h4 {
+  margin: 16px 0 8px;
+  font-size: 14px;
+  color: #cba6f7;
+}
+
+.report-pct {
+  font-size: 13px;
+  color: #a6e3a1;
+  font-weight: 600;
+}
+
+.report-stats {
+  font-size: 13px;
+  color: #6c7086;
+  margin: 0 0 16px;
+}
+
+/* Tasks by domain */
+.tasks-by-domain {
+  margin-bottom: 16px;
+}
+
+.domain-task-group {
+  margin-bottom: 12px;
+  background: #181825;
+  border-radius: 6px;
+  padding: 10px;
+}
+
+.domain-group-header {
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.domain-task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.domain-task-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  padding: 3px 6px;
+  border-radius: 4px;
+}
+
+.domain-task-item.completed-item {
+  color: #a6e3a1;
+  text-decoration: line-through;
+  opacity: 0.8;
+}
+
+.domain-task-item.open-item {
+  color: #cdd6f4;
+}
+
+.task-status-icon {
+  font-size: 12px;
+  width: 16px;
+  text-align: center;
+}
+
+/* Domain notes */
+.domain-notes-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.domain-note {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.domain-note label {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.domain-note textarea {
+  padding: 8px;
+  background: #181825;
+  border: 1px solid #313244;
+  border-radius: 6px;
+  color: #cdd6f4;
+  font-size: 13px;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.report-list {
+  margin-top: 24px;
+}
+
+.report-list h3 {
+  font-size: 15px;
+  color: #a6adc8;
+  margin: 0 0 12px;
+}
+
+.report-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: #1e1e2e;
+  border: 1px solid #313244;
+  border-radius: 8px;
+  margin-bottom: 6px;
+  cursor: pointer;
+  color: #cdd6f4;
+  font-size: 14px;
+  transition: background 0.15s;
+}
+
+.report-card:hover {
+  background: #313244;
+}
+
+.report-card .report-pct {
+  margin-right: auto;
+  margin-left: 0;
+}

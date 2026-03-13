@@ -1,0 +1,46 @@
+.monthly-view {
+  max-width: 900px;
+}
+
+.view-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.view-header h2 {
+  margin: 0;
+  font-size: 20px;
+  color: #cdd6f4;
+  min-width: 200px;
+  text-align: center;
+}
+
+.task-list {
+  margin-top: 8px;
+}
+
+.empty-msg {
+  color: #6c7086;
+  font-size: 13px;
+  font-style: italic;
+  padding: 12px;
+}
+
+.prev-month-panel {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid #313244;
+}
+
+.panel-toggle {
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+.prev-task-list {
+  margin-top: 8px;
+  padding-left: 8px;
+  border-left: 2px solid #45475a;
+}

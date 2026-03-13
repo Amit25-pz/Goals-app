@@ -1,0 +1,14 @@
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+  background: #11111b;
+  direction: rtl;
+}
+
+.main-content {
+  margin-right: 220px;
+  flex: 1;
+  padding: 24px 32px;
+  min-width: 0;
+  color: #cdd6f4;
+}

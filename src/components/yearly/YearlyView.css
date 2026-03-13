@@ -1,0 +1,113 @@
+.yearly-view {
+  max-width: 900px;
+}
+
+.yearly-view .view-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 12px;
+}
+
+.yearly-view h2 {
+  flex: 1;
+  margin: 0;
+  font-size: 20px;
+}
+
+.yearly-section {
+  margin-bottom: 20px;
+}
+
+.yearly-section.ref-panel {
+  background: #1e1e2e;
+  border: 1px solid #313244;
+  border-radius: 10px;
+  padding: 14px;
+  margin-bottom: 12px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.section-header h3 {
+  margin: 0;
+  font-size: 14px;
+  color: #cba6f7;
+}
+
+.section-title {
+  font-size: 15px;
+  color: #cba6f7;
+  margin: 0 0 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #313244;
+}
+
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.category-group {
+  background: #1e1e2e;
+  border: 1px solid #313244;
+  border-radius: 10px;
+  padding: 14px;
+  margin-bottom: 12px;
+}
+
+.category-header {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cat-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.category-tasks {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.task-wrapper {
+  padding: 6px;
+  background: #181825;
+  border-radius: 6px;
+}
+
+.pull-controls {
+  padding: 4px 8px;
+  margin-top: 4px;
+}
+
+.pull-btn {
+  font-size: 11px;
+  color: #89b4fa;
+  padding: 2px 0;
+}
+
+.pull-btn:hover {
+  color: #a6e3a1;
+}
+
+.ref-task {
+  padding: 6px;
+  background: #181825;
+  border-radius: 6px;
+}

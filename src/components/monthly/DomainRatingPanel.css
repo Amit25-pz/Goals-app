@@ -1,0 +1,74 @@
+.domain-rating-panel {
+  background: #1e1e2e;
+  border: 1px solid #313244;
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.panel-header h3 {
+  margin: 0;
+  font-size: 15px;
+  color: #cba6f7;
+}
+
+.toggle {
+  color: #6c7086;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.rating-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.rating-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 10px;
+  background: #181825;
+  border-radius: 6px;
+}
+
+.rating-domain {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.rating-buttons {
+  display: flex;
+  gap: 4px;
+}
+
+.rating-btn {
+  padding: 3px 10px;
+  border: 1px solid #45475a;
+  border-radius: 4px;
+  background: none;
+  color: #6c7086;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  text-transform: capitalize;
+  transition: all 0.15s;
+}
+
+.rating-btn:hover {
+  border-color: #6c7086;
+  color: #cdd6f4;
+}
+
+.rating-btn.active {
+  font-weight: 700;
+}
