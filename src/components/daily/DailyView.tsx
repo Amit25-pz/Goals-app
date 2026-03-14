@@ -78,17 +78,22 @@ export default function DailyView() {
 
       <CompletionStats tasks={allDayTasks} />
 
-      {/* Auto-pulled tasks from weekly (assigned to this day) */}
-      {autoWeeklyTasks.length > 0 && (
-        <div className="daily-section">
-          <h3 className="section-title auto-title">{he.autoFromWeekly}</h3>
-          <div className="task-list">
-            {autoWeeklyTasks.map(t => (
+      <TaskCreateForm planLevel="daily" dayKey={currentDayKey} />
+
+      {/* Combined task list with source indicator */}
+      <div className="daily-section">
+        <div className="task-list">
+          {allDayTasks.map(t => {
+            const isAuto = autoWeeklyTasks.some(aw => aw.id === t.id);
+            const subtasks = isAuto ? weeklyTasks.filter(s => s.parentTaskId === t.id) : getSubtasks(t.id);
+            return (
               <div key={t.id} className="daily-task-wrapper">
-                <TaskItem
-                  task={t}
-                  subtasks={weeklyTasks.filter(s => s.parentTaskId === t.id)}
-                />
+                <div className="task-with-source">
+                  <TaskItem task={t} subtasks={subtasks} />
+                  <span className={`task-source-badge ${isAuto ? 'auto' : 'manual'}`}>
+                    {isAuto ? he.autoFromWeekly : he.manualTasks}
+                  </span>
+                </div>
                 <div className="push-day-controls">
                   <button className="btn-text push-btn" onClick={() => setMovingTaskId(movingTaskId === t.id ? null : t.id)}>
                     {he.pushToDay}
@@ -97,7 +102,7 @@ export default function DailyView() {
                     <div className="day-picker-row">
                       <span className="assign-label">{he.moveToDay}</span>
                       {weekDays.filter(d => d.dayKey !== currentDayKey).map(d => (
-                        <button key={d.dayKey} className="assign-day-btn" onClick={() => handleMoveWeeklyTask(t, d.dayKey)}>
+                        <button key={d.dayKey} className="assign-day-btn" onClick={() => isAuto ? handleMoveWeeklyTask(t, d.dayKey) : handleMoveDailyTask(t, d.dayKey)}>
                           {d.dayName}
                         </button>
                       ))}
@@ -105,36 +110,8 @@ export default function DailyView() {
                   )}
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* Manual daily tasks */}
-      <div className="daily-section">
-        <h3 className="section-title">{he.manualTasks}</h3>
-        <TaskCreateForm planLevel="daily" dayKey={currentDayKey} />
-        <div className="task-list">
-          {manualDailyTasks.map(t => (
-            <div key={t.id} className="daily-task-wrapper">
-              <TaskItem task={t} subtasks={getSubtasks(t.id)} />
-              <div className="push-day-controls">
-                <button className="btn-text push-btn" onClick={() => setMovingTaskId(movingTaskId === t.id ? null : t.id)}>
-                  {he.pushToDay}
-                </button>
-                {movingTaskId === t.id && (
-                  <div className="day-picker-row">
-                    <span className="assign-label">{he.moveToDay}</span>
-                    {weekDays.filter(d => d.dayKey !== currentDayKey).map(d => (
-                      <button key={d.dayKey} className="assign-day-btn" onClick={() => handleMoveDailyTask(t, d.dayKey)}>
-                        {d.dayName}
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
 

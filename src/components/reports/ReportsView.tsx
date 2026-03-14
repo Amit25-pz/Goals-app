@@ -27,21 +27,6 @@ export default function ReportsView() {
     return getTasksForPeriod(level as any, editingReport.periodKey);
   }, [editingReport, refreshKey]);
 
-  // Group tasks by domain
-  const tasksByDomain = useMemo(() => {
-    const grouped: Record<string, { completed: Task[]; open: Task[] }> = {};
-    categories.forEach(cat => { grouped[cat.id] = { completed: [], open: [] }; });
-    reportTasks.filter(t => !t.parentTaskId).forEach(t => {
-      if (!grouped[t.categoryId]) grouped[t.categoryId] = { completed: [], open: [] };
-      if (t.isCompleted) {
-        grouped[t.categoryId].completed.push(t);
-      } else {
-        grouped[t.categoryId].open.push(t);
-      }
-    });
-    return grouped;
-  }, [reportTasks, categories]);
-
   const generateReport = () => {
     if (!currentUser) return;
     let periodKey: string;
@@ -131,36 +116,6 @@ export default function ReportsView() {
           <p className="report-stats">
             {editingReport.completedTaskIds.length} {he.completedTasks}, {editingReport.openTaskIds.length} {he.openTasks}
           </p>
-
-          {/* Feature #5: Tasks by domain with status */}
-          <div className="tasks-by-domain">
-            <h4>{he.tasksByDomain}</h4>
-            {categories.map(cat => {
-              const domainData = tasksByDomain[cat.id];
-              if (!domainData || (domainData.completed.length === 0 && domainData.open.length === 0)) return null;
-              return (
-                <div key={cat.id} className="domain-task-group">
-                  <div className="domain-group-header" style={{ color: cat.color }}>
-                    {cat.name} ({domainData.completed.length + domainData.open.length})
-                  </div>
-                  <div className="domain-task-list">
-                    {domainData.completed.map(t => (
-                      <div key={t.id} className="domain-task-item completed-item">
-                        <span className="task-status-icon">&#10003;</span>
-                        <span>{t.title}</span>
-                      </div>
-                    ))}
-                    {domainData.open.map(t => (
-                      <div key={t.id} className="domain-task-item open-item">
-                        <span className="task-status-icon">&#9675;</span>
-                        <span>{t.title}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
 
           {/* Domain reflections */}
           <h4>{he.domainReflections}</h4>

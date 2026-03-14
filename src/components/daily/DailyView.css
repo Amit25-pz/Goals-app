@@ -44,6 +44,31 @@
   margin-bottom: 4px;
 }
 
+.task-with-source {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.task-source-badge {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-left: 8px;
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+.task-source-badge.auto {
+  background: #a6e3a122;
+  color: #a6e3a1;
+}
+
+.task-source-badge.manual {
+  background: #cba6f722;
+  color: #cba6f7;
+}
+
 .push-day-controls {
   padding: 2px 8px;
 }
