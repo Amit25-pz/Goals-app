@@ -108,6 +108,46 @@
   color: #cdd6f4;
 }
 
+.domain-task-detail {
+  padding: 8px;
+  border-bottom: 1px solid #313244;
+  background: #0f111a;
+  border-radius: 4px;
+  margin-bottom: 6px;
+}
+
+.domain-task-detail.completed-item {
+  color: #a6e3a1;
+}
+
+.domain-task-detail.completed-item .task-title {
+  text-decoration: line-through;
+  opacity: 0.9;
+}
+
+.domain-task-detail.open-item {
+  color: #cdd6f4;
+}
+
+.domain-task-detail .task-title {
+  font-weight: 600;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.domain-task-detail .task-meta {
+  margin-left: 20px;
+  font-size: 12px;
+  color: #a6adc8;
+}
+
+.domain-task-detail .task-meta-line {
+  margin: 2px 0;
+  line-height: 1.4;
+}
+
 .task-status-icon {
   font-size: 12px;
   width: 16px;
