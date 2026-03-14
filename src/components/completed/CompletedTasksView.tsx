@@ -2,7 +2,9 @@ import { useMemo } from 'react';
 import type { Task } from '../../types';
 import { useApp } from '../../context/AppContext';
 import { he } from '../../utils/he';
+import { exportCompletedTasksPDF } from '../../utils/exportPdf';
 import CategoryBadge from '../shared/CategoryBadge';
+import { Download } from 'lucide-react';
 import './CompletedTasksView.css';
 
 export default function CompletedTasksView() {
@@ -42,10 +44,21 @@ export default function CompletedTasksView() {
     );
   }, [completedTasks]);
 
+  const handleExportPDF = () => {
+    exportCompletedTasksPDF(completedTasks, categories);
+  };
+
   return (
     <div className="completed-tasks-view">
       <h2>{he.navCompleted}</h2>
-      <p className="completed-summary">{he.totalCompleted}: {completedTasks.length}</p>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+        <p className="completed-summary">{he.totalCompleted}: {completedTasks.length}</p>
+        {completedTasks.length > 0 && (
+          <button className="btn btn-secondary" onClick={handleExportPDF}>
+            <Download size={14} /> {he.exportPDF}
+          </button>
+        )}
+      </div>
 
       {Object.entries(groupedByMonth).map(([month, tasks]) => {
         const monthDate = new Date(month + '-01');

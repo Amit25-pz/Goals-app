@@ -106,7 +106,7 @@ export default function ReportsView() {
   };
 
   const exportPDF = (report: Report) => {
-    exportReportPDF(report, categories);
+    exportReportPDF(report, categories, currentUser?.id);
   };
 
   return (
