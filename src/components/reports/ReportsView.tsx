@@ -10,18 +10,20 @@ import { FileText, Download, Plus } from 'lucide-react';
 import './ReportsView.css';
 
 export default function ReportsView() {
-  const { categories, currentMonthKey, currentWeekKey, getTasksForPeriod, refreshKey } = useApp();
+  const { categories, currentMonthKey, currentWeekKey, currentUser, getTasksForPeriod, refreshKey } = useApp();
   const [activeTab, setActiveTab] = useState<ReportType>('monthly');
   const [editingReport, setEditingReport] = useState<Report | null>(null);
+  const currentYear = currentMonthKey.split('-')[0];
 
   const reports = useMemo(() => {
-    return storage.getReports().filter(r => r.type === activeTab).sort((a, b) => b.periodKey.localeCompare(a.periodKey));
-  }, [activeTab, refreshKey, editingReport]);
+    if (!currentUser) return [];
+    return storage.getReports(currentUser.id).filter(r => r.type === activeTab).sort((a, b) => b.periodKey.localeCompare(a.periodKey));
+  }, [activeTab, refreshKey, editingReport, currentUser]);
 
   // Get tasks for current report period
   const reportTasks = useMemo(() => {
     if (!editingReport) return [];
-    const level = editingReport.type === 'monthly' ? 'monthly' : 'weekly';
+    const level = editingReport.type === 'monthly' ? 'monthly' : editingReport.type === 'weekly' ? 'weekly' : 'yearly';
     return getTasksForPeriod(level as any, editingReport.periodKey);
   }, [editingReport, refreshKey]);
 
@@ -41,14 +43,27 @@ export default function ReportsView() {
   }, [reportTasks, categories]);
 
   const generateReport = () => {
-    const periodKey = activeTab === 'monthly' ? currentMonthKey : currentWeekKey;
-    const level = activeTab === 'monthly' ? 'monthly' : 'weekly';
-    const tasks = getTasksForPeriod(level as any, periodKey);
+    if (!currentUser) return;
+    let periodKey: string;
+    let level: 'monthly' | 'weekly' | 'yearly';
+
+    if (activeTab === 'monthly') {
+      periodKey = currentMonthKey;
+      level = 'monthly';
+    } else if (activeTab === 'weekly') {
+      periodKey = currentWeekKey;
+      level = 'weekly';
+    } else {
+      periodKey = currentYear;
+      level = 'yearly';
+    }
+
+    const tasks = getTasksForPeriod(level, periodKey);
     const topLevel = tasks.filter(t => !t.parentTaskId);
     const completed = topLevel.filter(t => t.isCompleted);
     const open = topLevel.filter(t => !t.isCompleted);
 
-    const existing = storage.getReport(activeTab, periodKey);
+    const existing = storage.getReport(currentUser.id, activeTab, periodKey);
     const report: Report = existing ? {
       ...existing,
       completionPercentage: topLevel.length === 0 ? 0 : Math.round((completed.length / topLevel.length) * 100),
@@ -66,25 +81,28 @@ export default function ReportsView() {
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     };
-    storage.saveReport(report);
+    storage.saveReport(currentUser.id, report);
     setEditingReport(report);
   };
 
   const updateDomainNote = (categoryId: string, note: string) => {
-    if (!editingReport) return;
+    if (!editingReport || !currentUser) return;
     const updated = {
       ...editingReport,
       domainNotes: { ...editingReport.domainNotes, [categoryId]: note },
       updatedAt: new Date().toISOString(),
     };
     setEditingReport(updated);
-    storage.saveReport(updated);
+    storage.saveReport(currentUser.id, updated);
   };
 
   const formatLabel = (report: Report) => {
     if (report.type === 'monthly') return formatMonthHe(report.periodKey);
-    const { start, end } = getWeekDateRange(report.periodKey);
-    return formatWeekHe(report.periodKey, start, end);
+    if (report.type === 'weekly') {
+      const { start, end } = getWeekDateRange(report.periodKey);
+      return formatWeekHe(report.periodKey, start, end);
+    }
+    return `${he.yearlyGoals} ${report.periodKey}`;
   };
 
   const exportPDF = (report: Report) => {
@@ -97,10 +115,11 @@ export default function ReportsView() {
       <div className="report-tabs">
         <button className={`tab ${activeTab === 'monthly' ? 'active' : ''}`} onClick={() => { setActiveTab('monthly'); setEditingReport(null); }}>{he.monthly}</button>
         <button className={`tab ${activeTab === 'weekly' ? 'active' : ''}`} onClick={() => { setActiveTab('weekly'); setEditingReport(null); }}>{he.weekly}</button>
+        <button className={`tab ${activeTab === 'yearly' ? 'active' : ''}`} onClick={() => { setActiveTab('yearly'); setEditingReport(null); }}>{he.yearlyGoals}</button>
       </div>
 
       <button className="btn btn-primary" onClick={generateReport}>
-        <Plus size={14} /> {he.generateReport(activeTab === 'monthly' ? he.monthly : he.weekly)}
+        <Plus size={14} /> {he.generateReport(activeTab === 'monthly' ? he.monthly : activeTab === 'weekly' ? he.weekly : he.yearlyGoals)}
       </button>
 
       {editingReport && (
@@ -174,7 +193,7 @@ export default function ReportsView() {
             <button className="btn-icon" onClick={e => { e.stopPropagation(); exportPDF(r); }}><Download size={14} /></button>
           </div>
         ))}
-        {reports.length === 0 && <p className="empty-msg">{he.noReports(activeTab === 'monthly' ? he.monthly : he.weekly)}</p>}
+        {reports.length === 0 && <p className="empty-msg">{he.noReports(activeTab === 'monthly' ? he.monthly : activeTab === 'weekly' ? he.weekly : he.yearlyGoals)}</p>}
       </div>
     </div>
   );

@@ -59,8 +59,14 @@
   padding: 4px 0;
 }
 
-.user-item {
+.user-item-wrapper {
+  display: flex;
+  align-items: center;
   width: 100%;
+}
+
+.user-item {
+  flex: 1;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -72,6 +78,50 @@
   cursor: pointer;
   transition: background 0.15s;
   text-align: right;
+}
+
+.user-rename-btn {
+  padding: 4px 8px;
+  background: none;
+  border: none;
+  color: #89b4fa;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: color 0.15s;
+}
+
+.user-rename-btn:hover {
+  color: #a6e3a1;
+}
+
+.user-rename-form {
+  flex: 1;
+  display: flex;
+  gap: 4px;
+  padding: 6px 12px;
+  align-items: center;
+}
+
+.user-input-inline {
+  flex: 1;
+  padding: 4px 6px;
+  background: #181825;
+  border: 1px solid #313244;
+  border-radius: 4px;
+  color: #cdd6f4;
+  font-size: 12px;
+}
+
+.btn-inline {
+  padding: 4px 8px;
+  background: #89b4fa;
+  color: #1e1e2e;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  min-width: 30px;
 }
 
 .user-item:hover {

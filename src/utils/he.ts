@@ -16,6 +16,7 @@ export const he = {
   addUser: 'הוסף משתמש',
   userNamePlaceholder: 'שם המשתמש...',
   deleteUser: 'מחק משתמש',
+  renameUser: 'שנה שם משתמש',
   confirmDeleteUser: 'בטוח שברצונך למחוק את המשתמש הנוכחי? כל הנתונים שלו יימחקו.',
   create: 'צור',
 

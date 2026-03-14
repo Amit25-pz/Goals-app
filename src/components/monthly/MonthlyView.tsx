@@ -14,12 +14,17 @@ export default function MonthlyView() {
   const { currentMonthKey, setCurrentMonthKey, getTasksForPeriod, refreshKey } = useApp();
 
   const [showPrevMonth, setShowPrevMonth] = useState(false);
+  const [showYearlyGoals, setShowYearlyGoals] = useState(false);
   const prevMonthKey = getPreviousMonthKey(currentMonthKey);
+  const currentYear = currentMonthKey.split('-')[0];
 
   const tasks = useMemo(() => getTasksForPeriod('monthly', currentMonthKey), [currentMonthKey, refreshKey]);
   const prevTasks = useMemo(() => getTasksForPeriod('monthly', prevMonthKey), [prevMonthKey, refreshKey]);
+  const yearlyTasks = useMemo(() => getTasksForPeriod('yearly', currentYear), [currentYear, refreshKey]);
   const topLevelTasks = tasks.filter(t => !t.parentTaskId);
+  const topLevelYearlyTasks = yearlyTasks.filter(t => !t.parentTaskId);
   const getSubtasks = (parentId: string) => tasks.filter(t => t.parentTaskId === parentId);
+  const getYearlySubtasks = (parentId: string) => yearlyTasks.filter(t => t.parentTaskId === parentId);
 
   const navigateMonth = (dir: number) => {
     const [y, m] = currentMonthKey.split('-').map(Number);
@@ -64,6 +69,25 @@ export default function MonthlyView() {
               />
             ))}
             {prevTasks.length === 0 && <p className="empty-msg">{he.noPrevMonthGoals}</p>}
+          </div>
+        )}
+      </div>
+
+      <div className="yearly-goals-panel">
+        <button className="btn-text panel-toggle" onClick={() => setShowYearlyGoals(!showYearlyGoals)}>
+          {showYearlyGoals ? he.hideYearlyGoals : he.showYearlyGoals} ({currentYear})
+        </button>
+        {showYearlyGoals && (
+          <div className="yearly-task-list">
+            {topLevelYearlyTasks.map(t => (
+              <TaskItem
+                key={t.id}
+                task={t}
+                subtasks={getYearlySubtasks(t.id)}
+                showPullDown={{ label: he.pullToMonthlyFromYearly, targetLevel: 'monthly', targetPeriodKey: currentMonthKey }}
+              />
+            ))}
+            {topLevelYearlyTasks.length === 0 && <p className="empty-msg">{he.noYearlyGoals}</p>}
           </div>
         )}
       </div>

@@ -44,3 +44,15 @@
   padding-left: 8px;
   border-left: 2px solid #45475a;
 }
+
+.yearly-goals-panel {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #313244;
+}
+
+.yearly-task-list {
+  margin-top: 8px;
+  padding-left: 8px;
+  border-left: 2px solid #a6e3a122;
+}

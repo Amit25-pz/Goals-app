@@ -6,14 +6,16 @@ import CategoryBadge from '../shared/CategoryBadge';
 import './CompletedTasksView.css';
 
 export default function CompletedTasksView() {
-  const { categories, refreshKey } = useApp();
+  const { categories, currentUser, refreshKey } = useApp();
 
-  // Scan all localStorage for completed tasks across all periods
+  // Scan all localStorage for completed tasks across all periods (user-scoped)
   const completedTasks = useMemo(() => {
+    if (!currentUser) return [];
     const tasks: Task[] = [];
+    const prefix = `goals_user_${currentUser.id}_tasks_`;
     for (let i = 0; i < localStorage.length; i++) {
       const key = localStorage.key(i);
-      if (key && key.startsWith('goals_tasks_')) {
+      if (key && key.startsWith(prefix)) {
         try {
           const stored: Task[] = JSON.parse(localStorage.getItem(key)!);
           stored.filter(t => t.isCompleted && !t.parentTaskId).forEach(t => tasks.push(t));
@@ -23,7 +25,7 @@ export default function CompletedTasksView() {
     // Sort by completion date, newest first
     tasks.sort((a, b) => (b.completedAt || '').localeCompare(a.completedAt || ''));
     return tasks;
-  }, [refreshKey]);
+  }, [refreshKey, currentUser]);
 
   // Group by completion month
   const groupedByMonth = useMemo(() => {

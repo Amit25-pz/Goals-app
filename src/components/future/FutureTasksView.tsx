@@ -10,7 +10,7 @@ import { Plus, ChevronDown } from 'lucide-react';
 import './FutureTasksView.css';
 
 export default function FutureTasksView() {
-  const { categories, createTask, refreshKey, triggerRefresh } = useApp();
+  const { categories, currentUser, createTask, refreshKey, triggerRefresh } = useApp();
   const [newTitle, setNewTitle] = useState('');
   const [newCategory, setNewCategory] = useState(categories[0]?.id || 'general-default');
   const [expandedTask, setExpandedTask] = useState<string | null>(null);
@@ -20,8 +20,9 @@ export default function FutureTasksView() {
   const [targetWeek, setTargetWeek] = useState(getWeekKey());
 
   const futureTasks = useMemo(() => {
-    return storage.getFutureTasks().filter(t => !t.parentTaskId);
-  }, [refreshKey]);
+    if (!currentUser) return [];
+    return storage.getFutureTasks(currentUser.id).filter(t => !t.parentTaskId);
+  }, [refreshKey, currentUser]);
 
   const groupedByCategory = useMemo(() => {
     const grouped: Record<string, Task[]> = {};
@@ -34,7 +35,7 @@ export default function FutureTasksView() {
   }, [futureTasks, categories]);
 
   const handleAddTask = () => {
-    if (!newTitle.trim()) return;
+    if (!newTitle.trim() || !currentUser) return;
     const task: Task = {
       id: uuidv4(),
       title: newTitle,
@@ -53,13 +54,15 @@ export default function FutureTasksView() {
       assignedDay: null,
       sourceTaskId: null,
       sortOrder: 0,
+      yearKey: null,
     };
-    storage.saveFutureTask(task);
+    storage.saveFutureTask(currentUser.id, task);
     setNewTitle('');
     triggerRefresh();
   };
 
   const handlePushTask = (task: Task) => {
+    if (!currentUser) return;
     if (pushTarget === 'month') {
       // Create task at monthly level
       const monthlyTask: Task = {
@@ -71,8 +74,9 @@ export default function FutureTasksView() {
         weekKey: null,
         dayKey: null,
         assignedDay: null,
+        yearKey: null,
       };
-      storage.saveTask(monthlyTask);
+      storage.saveTask(currentUser.id, monthlyTask);
     } else {
       // Create task at weekly level
       const weeklyTask: Task = {
@@ -84,16 +88,18 @@ export default function FutureTasksView() {
         weekKey: targetWeek,
         dayKey: null,
         assignedDay: null,
+        yearKey: null,
       };
-      storage.saveTask(weeklyTask);
+      storage.saveTask(currentUser.id, weeklyTask);
     }
-    storage.deleteFutureTask(task.id);
+    storage.deleteFutureTask(currentUser.id, task.id);
     setPushingTaskId(null);
     triggerRefresh();
   };
 
   const handleDeleteTask = (taskId: string) => {
-    storage.deleteFutureTask(taskId);
+    if (!currentUser) return;
+    storage.deleteFutureTask(currentUser.id, taskId);
     triggerRefresh();
   };
 

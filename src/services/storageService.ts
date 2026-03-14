@@ -52,6 +52,10 @@ export function setCurrentUserId(userId: string): void {
   save(GLOBAL_KEYS.currentUserId, userId);
 }
 
+export function saveUsers(users: User[]): void {
+  save(GLOBAL_KEYS.users, users);
+}
+
 export function createUser(name: string): User {
   const user: User = {
     id: uuidv4(),

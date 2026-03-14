@@ -1,6 +1,6 @@
 export type Rating = 'low' | 'medium' | 'high';
 export type PlanLevel = 'yearly' | 'monthly' | 'weekly' | 'daily';
-export type ReportType = 'monthly' | 'weekly';
+export type ReportType = 'monthly' | 'weekly' | 'yearly';
 
 export interface User {
   id: string;
